@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#070b14">
-<title>Lúcio Criador</title>
+<title>PRO</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,6 +77,7 @@
   .modulo::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-top-left-radius: 12px; }
   .modulo::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-bottom-right-radius: 12px; }
   .modulo:hover, .modulo:focus-visible { transform: translateY(-2px); border-color: var(--cor); box-shadow: 0 0 0 1px var(--cor), 0 10px 30px -12px var(--cor); outline: none; }
+  .arte { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--linha); }
   .cabeca { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--texto-2); }
   .id { color: var(--cor); }
   .pilula { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--linha); border-radius: 999px; padding: 2px 9px; font-size: 10px; }
@@ -87,16 +88,6 @@
   .acao { color: var(--cor); font-weight: 700; font-size: 13px; }
   .acao::before { content: "> "; opacity: .7; }
   .exemplo { color: var(--ambar); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; margin-left: 8px; font-weight: 500; font-family: var(--mono); }
-
-  .terminal { background: #050810; border: 1px solid var(--linha); border-radius: 12px; overflow: hidden; }
-  .terminal-barra { display: flex; gap: 6px; padding: 9px 12px; border-bottom: 1px solid var(--linha); background: var(--painel); align-items: center; }
-  .terminal-barra i { width: 9px; height: 9px; border-radius: 50%; background: var(--linha); }
-  .terminal-barra span { margin-left: 8px; font-size: 11px; color: var(--texto-2); }
-  .terminal-corpo { padding: 14px; display: grid; gap: 4px; }
-  .terminal-corpo p { margin: 0; overflow-wrap: anywhere; }
-  .t-dim { color: var(--texto-2); }
-  .t-ciano { color: var(--ciano); }
-  .t-ambar { color: var(--ambar); }
 
   .contato { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
   .arroba { flex: 1 1 160px; padding: 11px 14px; border-radius: 10px; background: var(--painel); border: 1px solid var(--linha); font-weight: 700; user-select: all; }
@@ -115,51 +106,35 @@
 <main>
   <div class="status" role="status">
     <span><span class="ponto" aria-hidden="true"></span>sistema online</span>
-    <span>3 projetos ativos</span>
+    <span>2 projetos ativos</span>
   </div>
 
   <header class="apresenta">
     <p class="prompt">&gt; whoami<span class="cursor" aria-hidden="true"></span></p>
-    <h1>Lúcio,<br><span>criador de sistemas no Telegram.</span></h1>
-    <p class="frase">Bots que vendem sozinhos, jogos pra jogar com amigos e IA que ajuda no dia a dia. Tudo feito por mim.</p>
+    <h1>PRO,<br><span>sistemas no Telegram.</span></h1>
+    <p class="frase">Um bot que vende e libera acesso sozinho e uma IA que cuida dos seus grupos. Tudo feito pelo Lúcio.</p>
   </header>
 
   <section aria-labelledby="t-mod">
     <p class="rotulo" id="t-mod">projetos</p>
     <div class="modulos">
       <a class="modulo" style="--cor: var(--ciano)" href="https://t.me/proassi_bot" target="_blank" rel="noopener">
+        <img class="arte" src="assinaturas.png" alt="Painel do PROVips no Telegram: status do bot, assinantes e menu de opções" width="1280" height="720">
         <div class="cabeca"><span class="id">mod_01</span><span class="pilula"><i></i>online</span></div>
-        <h2>AssinaturasPro</h2>
+        <h2>PROVips</h2>
         <p>Bot que vende e libera acesso ao seu canal VIP, sozinho. Pix, cobrança e vencimento no automático.</p>
         <span class="acao">abrir_bot</span>
       </a>
-      <a class="modulo" style="--cor: var(--ambar)" href="#" onclick="return false">
-        <div class="cabeca"><span class="id">mod_02</span><span class="pilula espera"><i></i>em breve</span></div>
-        <h2>Mini Games<span class="exemplo">exemplo</span></h2>
-        <p>Jogos rápidos direto na conversa, pra jogar com os amigos e disputar ranking.</p>
-        <span class="acao">jogar</span>
-      </a>
-      <a class="modulo" style="--cor: var(--violeta)" href="#" onclick="return false">
-        <div class="cabeca"><span class="id">mod_03</span><span class="pilula espera"><i></i>em breve</span></div>
-        <h2>IA no Telegram<span class="exemplo">exemplo</span></h2>
-        <p>Uma assistente que responde, resume e resolve, sem sair da conversa.</p>
-        <span class="acao">conversar</span>
+      <a class="modulo" style="--cor: var(--violeta)" href="https://t.me/luciol0?text=oi%2C%20queria%20conhecer%20a%20proai%20e%20testar%20nos%20meus%20grupos" target="_blank" rel="noopener">
+        <div class="cabeca"><span class="id">mod_02</span><span class="pilula"><i></i>online</span></div>
+        <h2>ProAI</h2>
+        <p>IA que administra os seus grupos e conversa sozinha com o pessoal.</p>
+        <span class="acao">testar_nos_meus_grupos</span>
       </a>
     </div>
   </section>
 
-  <section aria-labelledby="t-bio">
-    <p class="rotulo" id="t-bio">sua bio no telegram</p>
-    <div class="terminal">
-      <div class="terminal-barra"><i></i><i></i><i></i><span>bio.txt</span></div>
-      <div class="terminal-corpo">
-        <p>Criador do <span class="t-ciano">AssinaturasPro</span>, <span class="t-ambar">Mini Games</span> e IA</p>
-        <p class="t-dim">t.me/seu-link &larr; leva pra esta página</p>
-      </div>
-    </div>
-  </section>
-
-  <section aria-labelledby="t-contato">
+    <section aria-labelledby="t-contato">
     <p class="rotulo" id="t-contato">contato</p>
     <div class="contato">
       <span class="arroba" id="arroba">@luciol0</span>
@@ -167,7 +142,7 @@
     </div>
   </section>
 
-  <p class="rodape">novidades do AssinaturasPro em <a href="https://t.me/hubaspro" target="_blank" rel="noopener">@hubaspro</a></p>
+  <p class="rodape">novidades do PROVips em <a href="https://t.me/hubaspro" target="_blank" rel="noopener">@hubaspro</a></p>
 </main>
 
 <script>
