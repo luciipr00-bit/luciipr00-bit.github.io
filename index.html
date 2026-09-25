@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070b14">
+<title>Lúcio Criador</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --fundo: #070b14;
+    --painel: #0d1424;
+    --painel-2: #111b30;
+    --linha: #1e2c48;
+    --texto: #e6edf8;
+    --texto-2: #7f92b4;
+    --ciano: #38d5ff;
+    --ambar: #ffb547;
+    --violeta: #8f7bff;
+    --ok: #3ddc97;
+    --display: "Sora", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background-color: var(--fundo);
+    background-image:
+      radial-gradient(48rem 22rem at 50% -6rem, rgba(56, 213, 255, .14), transparent 70%),
+      linear-gradient(rgba(56, 213, 255, .045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 213, 255, .045) 1px, transparent 1px);
+    background-size: auto, 32px 32px, 32px 32px;
+    background-position: 0 0, -1px -1px, -1px -1px;
+    color: var(--texto);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.6;
+    padding-inline: 18px;
+    padding-block: 36px 56px;
+  }
+  main { max-width: 480px; margin: 0 auto; display: grid; gap: 26px; }
+
+  /* barra de status no topo */
+  .status {
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--texto-2);
+    border: 1px solid var(--linha); background: rgba(13, 20, 36, .8); border-radius: 10px; padding: 8px 12px;
+  }
+  .ponto { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); margin-right: 8px; box-shadow: 0 0 8px var(--ok); animation: pulsa 2s ease-in-out infinite; }
+  @keyframes pulsa { 50% { opacity: .35; } }
+
+  .apresenta { display: grid; gap: 12px; }
+  .prompt { margin: 0; color: var(--ciano); font-size: 13px; }
+  .prompt .cursor { display: inline-block; width: 8px; height: 15px; background: var(--ciano); vertical-align: -2px; margin-left: 2px; animation: pisca 1s steps(1) infinite; }
+  @keyframes pisca { 50% { opacity: 0; } }
+  h1 { margin: 0; font: 800 36px/1.05 var(--display); letter-spacing: -0.03em; text-wrap: balance; }
+  h1 span { background: linear-gradient(90deg, var(--ciano), var(--violeta)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .frase { margin: 0; color: var(--texto-2); max-width: 44ch; }
+
+  .rotulo { margin: 0 0 12px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--texto-2); }
+  .rotulo::before { content: "// "; color: var(--ciano); }
+
+  .modulos { display: grid; gap: 12px; }
+  .modulo {
+    --cor: var(--ciano);
+    position: relative; display: grid; gap: 10px;
+    padding: 16px 16px 14px; border-radius: 12px;
+    background: linear-gradient(180deg, var(--painel-2), var(--painel));
+    border: 1px solid var(--linha);
+    color: inherit; text-decoration: none;
+    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .modulo::before, .modulo::after { content: ""; position: absolute; width: 10px; height: 10px; border: 1px solid var(--cor); opacity: .8; }
+  .modulo::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-top-left-radius: 12px; }
+  .modulo::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-bottom-right-radius: 12px; }
+  .modulo:hover, .modulo:focus-visible { transform: translateY(-2px); border-color: var(--cor); box-shadow: 0 0 0 1px var(--cor), 0 10px 30px -12px var(--cor); outline: none; }
+  .cabeca { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--texto-2); }
+  .id { color: var(--cor); }
+  .pilula { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--linha); border-radius: 999px; padding: 2px 9px; font-size: 10px; }
+  .pilula i { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
+  .pilula.espera i { background: var(--ambar); }
+  .modulo h2 { margin: 0; font: 700 21px/1.15 var(--display); letter-spacing: -0.01em; }
+  .modulo p { margin: 0; color: var(--texto-2); }
+  .acao { color: var(--cor); font-weight: 700; font-size: 13px; }
+  .acao::before { content: "> "; opacity: .7; }
+  .exemplo { color: var(--ambar); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; margin-left: 8px; font-weight: 500; font-family: var(--mono); }
+
+  .terminal { background: #050810; border: 1px solid var(--linha); border-radius: 12px; overflow: hidden; }
+  .terminal-barra { display: flex; gap: 6px; padding: 9px 12px; border-bottom: 1px solid var(--linha); background: var(--painel); align-items: center; }
+  .terminal-barra i { width: 9px; height: 9px; border-radius: 50%; background: var(--linha); }
+  .terminal-barra span { margin-left: 8px; font-size: 11px; color: var(--texto-2); }
+  .terminal-corpo { padding: 14px; display: grid; gap: 4px; }
+  .terminal-corpo p { margin: 0; overflow-wrap: anywhere; }
+  .t-dim { color: var(--texto-2); }
+  .t-ciano { color: var(--ciano); }
+  .t-ambar { color: var(--ambar); }
+
+  .contato { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+  .arroba { flex: 1 1 160px; padding: 11px 14px; border-radius: 10px; background: var(--painel); border: 1px solid var(--linha); font-weight: 700; user-select: all; }
+  .arroba::before { content: "$ "; color: var(--ciano); font-weight: 400; }
+  button.copiar { font: 700 13px var(--mono); color: var(--fundo); background: var(--ciano); border: 0; border-radius: 10px; padding: 11px 18px; cursor: pointer; }
+  button.copiar:hover, button.copiar:focus-visible { filter: brightness(1.12); outline: 2px solid var(--texto); outline-offset: 2px; }
+  .rodape { margin: 0; text-align: center; color: var(--texto-2); font-size: 12px; }
+  .rodape a { color: var(--ciano); }
+
+  @media (max-width: 380px) { h1 { font-size: 30px; } }
+  @media (prefers-reduced-motion: reduce) { .ponto, .cursor { animation: none; } .modulo { transition: none; } }
+</style>
+
+</head>
+<body>
+<main>
+  <div class="status" role="status">
+    <span><span class="ponto" aria-hidden="true"></span>sistema online</span>
+    <span>3 projetos ativos</span>
+  </div>
+
+  <header class="apresenta">
+    <p class="prompt">&gt; whoami<span class="cursor" aria-hidden="true"></span></p>
+    <h1>Lúcio,<br><span>criador de sistemas no Telegram.</span></h1>
+    <p class="frase">Bots que vendem sozinhos, jogos pra jogar com amigos e IA que ajuda no dia a dia. Tudo feito por mim.</p>
+  </header>
+
+  <section aria-labelledby="t-mod">
+    <p class="rotulo" id="t-mod">projetos</p>
+    <div class="modulos">
+      <a class="modulo" style="--cor: var(--ciano)" href="https://t.me/proassi_bot" target="_blank" rel="noopener">
+        <div class="cabeca"><span class="id">mod_01</span><span class="pilula"><i></i>online</span></div>
+        <h2>AssinaturasPro</h2>
+        <p>Bot que vende e libera acesso ao seu canal VIP, sozinho. Pix, cobrança e vencimento no automático.</p>
+        <span class="acao">abrir_bot</span>
+      </a>
+      <a class="modulo" style="--cor: var(--ambar)" href="#" onclick="return false">
+        <div class="cabeca"><span class="id">mod_02</span><span class="pilula espera"><i></i>em breve</span></div>
+        <h2>Mini Games<span class="exemplo">exemplo</span></h2>
+        <p>Jogos rápidos direto na conversa, pra jogar com os amigos e disputar ranking.</p>
+        <span class="acao">jogar</span>
+      </a>
+      <a class="modulo" style="--cor: var(--violeta)" href="#" onclick="return false">
+        <div class="cabeca"><span class="id">mod_03</span><span class="pilula espera"><i></i>em breve</span></div>
+        <h2>IA no Telegram<span class="exemplo">exemplo</span></h2>
+        <p>Uma assistente que responde, resume e resolve, sem sair da conversa.</p>
+        <span class="acao">conversar</span>
+      </a>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-bio">
+    <p class="rotulo" id="t-bio">sua bio no telegram</p>
+    <div class="terminal">
+      <div class="terminal-barra"><i></i><i></i><i></i><span>bio.txt</span></div>
+      <div class="terminal-corpo">
+        <p>Criador do <span class="t-ciano">AssinaturasPro</span>, <span class="t-ambar">Mini Games</span> e IA</p>
+        <p class="t-dim">t.me/seu-link &larr; leva pra esta página</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-contato">
+    <p class="rotulo" id="t-contato">contato</p>
+    <div class="contato">
+      <span class="arroba" id="arroba">@luciol0</span>
+      <button class="copiar" id="copiar" type="button">copiar</button>
+    </div>
+  </section>
+
+  <p class="rodape">novidades do AssinaturasPro em <a href="https://t.me/hubaspro" target="_blank" rel="noopener">@hubaspro</a></p>
+</main>
+
+<script>
+  const botao = document.getElementById("copiar");
+  botao.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText("@luciol0");
+      botao.textContent = "copiado";
+    } catch {
+      const r = document.createRange();
+      r.selectNodeContents(document.getElementById("arroba"));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      botao.textContent = "selecionado";
+    }
+    setTimeout(() => (botao.textContent = "copiar"), 1800);
+  });
+</script>
+<script>
+  // Dentro do Telegram (Mini App): abre em tela cheia e usa o jeito nativo de abrir links t.me.
+  const tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    tg.ready();
+    tg.expand();
+    document.querySelectorAll('a[href^="https://t.me/"]').forEach((a) => {
+      a.addEventListener("click", (e) => { e.preventDefault(); tg.openTelegramLink(a.href); });
+    });
+  }
+</script>
+</body>
+</html>
